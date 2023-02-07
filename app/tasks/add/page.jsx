@@ -80,6 +80,7 @@ export default function () {
                                                 id="name"
                                                 className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 placeholder="名稱"
+                                                required={true}
                                             />
                                         </div>
                                     </div>
@@ -98,6 +99,7 @@ export default function () {
                                                 rows={5}
                                                 className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 placeholder="內容"
+                                                minLength={30}
                                             />
                                         </div>
                                     </div>
