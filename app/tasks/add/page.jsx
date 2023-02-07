@@ -34,12 +34,14 @@ export default function () {
         const form = e.target
         const data = new FormData(form)
         const name = data.get('name')
+        const body = data.get('body')
         const username = localStorage.getItem('username')
         const issue = await api(`/repos/${username}/__task_db/issues`, {
             method: 'POST',
             body: JSON.stringify({
                 title: name,
                 body: JSON.stringify({
+                    body,
                     color: data.get('color'),
                 }),
             })
@@ -78,6 +80,24 @@ export default function () {
                                                 id="name"
                                                 className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 placeholder="名稱"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-3 gap-6">
+                                    <div className="col-span-3 sm:col-span-2">
+                                        <label htmlFor="body"
+                                               className="block text-sm font-medium text-gray-700">
+                                            內容
+                                        </label>
+                                        <div className="mt-1 rounded-md shadow-sm">
+                                            <textarea
+                                                name="body"
+                                                id="body"
+                                                rows={5}
+                                                className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                placeholder="內容"
                                             />
                                         </div>
                                     </div>
