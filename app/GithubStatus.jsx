@@ -5,7 +5,7 @@ import api from "@/app/common/api";
 
 export default function GithubStatus() {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [userName, setUserName] = useState('')
+    const [userName, setUserName] = useState(localStorage.getItem('username') ?? "")
     const url = `https://github.com/login/oauth/authorize` +
         `?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}` +
         `&redirect_uri=${process.env.NEXT_PUBLIC_GITHUB_REDIRECT_URI}` +
@@ -22,13 +22,14 @@ export default function GithubStatus() {
             })
             setLoggedIn(true)
             setUserName(data?.name)
+            localStorage.setItem('username', data?.login ?? "")
         }
 
         run()
     })
 
     const clickGithub = () => {
-        if(loggedIn) {
+        if (loggedIn) {
             return
         }
         location.href = url
@@ -40,8 +41,8 @@ export default function GithubStatus() {
             onClick={clickGithub}
         >
             <Image src={"/github.svg"} width={24} height={24} alt={"github logo"}
-                className={"fill-white"}/>
-           {loggedIn ? userName : '登入'}
+                   className={"fill-white"}/>
+            {loggedIn ? userName : '登入'}
         </button>
     )
 }

@@ -1,10 +1,7 @@
 import GithubStatus from "@/app/GithubStatus";
 
 const navigation = [
-    {name: 'Solutions', href: '#'},
-    {name: 'Pricing', href: '#'},
-    {name: 'Docs', href: '#'},
-    {name: 'Company', href: '#'},
+    {name: 'Task', href: '/tasks'},
 ]
 
 export default function Header() {
