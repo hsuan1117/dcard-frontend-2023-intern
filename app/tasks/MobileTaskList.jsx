@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import Link from "next/link";
-import {DocumentIcon, FolderIcon} from "@heroicons/react/24/outline";
 import api from "@/app/common/api";
 
 function classNames(...classes) {
@@ -12,7 +11,7 @@ export default function ({pathname}) {
     const {
         data: tasks,
         isLoading
-    } = useSWR(`/repos/${username}/__task_db/issues`, url => api(url))
+    } = useSWR(`/repos/${username}/__task_db/issues?per_page=10&page=1`, url => api(url))
     return (
         <>
             {isLoading ?? '<span>載入中</span>'}
