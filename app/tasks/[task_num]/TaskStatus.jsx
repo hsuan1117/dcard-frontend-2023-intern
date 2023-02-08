@@ -3,6 +3,7 @@ import {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronDownIcon} from '@heroicons/react/20/solid'
 import api from "@/app/common/api";
+import {ArrowPathRoundedSquareIcon, CheckCircleIcon, ChevronUpIcon, XCircleIcon} from "@heroicons/react/24/outline";
 
 
 function classNames(...classes) {
@@ -11,9 +12,9 @@ function classNames(...classes) {
 
 export default function TaskStatus({task, status}) {
     const publishingOptions = [
-        {title: '未開始', description: '這項任務還沒開始', current: status?.includes('未開始')},
-        {title: '進行中', description: '這項任務已經著手進行了', current: status?.includes('進行中')},
-        {title: '已完成', description: '這項任務已經完成了', current: status?.includes('已完成')},
+        {title: '未開始', description: '這項任務還沒開始', current: status?.includes('未開始'), icon: XCircleIcon},
+        {title: '進行中', description: '這項任務已經著手進行了', current: status?.includes('進行中'), icon: ArrowPathRoundedSquareIcon},
+        {title: '已完成', description: '這項任務已經完成了', current: status?.includes('已完成'), icon: CheckCircleIcon},
     ]
 
     const [selected, setSelected] = useState(publishingOptions.filter((option) => option.current)[0] ?? publishingOptions[0])
@@ -38,7 +39,7 @@ export default function TaskStatus({task, status}) {
                             <div className="inline-flex divide-x divide-indigo-600 rounded-md shadow-sm">
                                 <div
                                     className="inline-flex items-center rounded-l-md border border-transparent bg-indigo-500 py-2 pl-3 pr-4 text-white shadow-sm">
-                                    <CheckIcon className="h-5 w-5" aria-hidden="true"/>
+                                    <selected.icon className="h-5 w-5" aria-hidden="true"/>
                                     <p className="ml-2.5 text-sm font-medium">{selected.title}</p>
                                 </div>
                                 <Listbox.Button
@@ -71,7 +72,8 @@ export default function TaskStatus({task, status}) {
                                     >
                                         {({selected, active}) => (
                                             <div className="flex flex-col">
-                                                <div className="flex justify-between">
+                                                <div className="flex gap-1">
+                                                    <option.icon className="h-5 w-5"/>
                                                     <p className={selected ? 'font-semibold' : 'font-normal'}>{option.title}</p>
                                                     {selected ? (
                                                         <span className={active ? 'text-white' : 'text-indigo-500'}>
