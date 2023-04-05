@@ -5,7 +5,7 @@ import api from "@/app/common/api";
 
 export default function GithubStatus() {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [userName, setUserName] = useState(localStorage.getItem('username') ?? "")
+    const [userName, setUserName] = useState(typeof localStorage!=="undefined"?(localStorage.getItem('username') ?? ""):"")
     const url = `https://github.com/login/oauth/authorize` +
         `?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}` +
         `&redirect_uri=${process.env.NEXT_PUBLIC_GITHUB_REDIRECT_URI}` +

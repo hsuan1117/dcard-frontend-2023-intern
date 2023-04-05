@@ -28,7 +28,6 @@ export default function SearchTaskSort({task, sortType, setSortType}) {
     ]
 
     const [selected, setSelected] = useState(publishingOptions.filter((option) => option.current)[0] ?? publishingOptions[0])
-    const username = localStorage.getItem('username')
     const statusChange = async (new_status) => {
         setSortType(new_status.value)
         setSelected(new_status)

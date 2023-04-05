@@ -31,7 +31,7 @@ export default function callback() {
                 alert('error')
             })
 
-            localStorage.setItem('token', data.access_token)
+            if(window.localStorage)window.localStorage.setItem('token', data.access_token)
         }
 
         run().then(() => {

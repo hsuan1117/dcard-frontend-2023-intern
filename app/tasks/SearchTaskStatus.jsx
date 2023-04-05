@@ -27,7 +27,6 @@ export default function SearchTaskStatus({task, state, setState}) {
     ]
 
     const [selected, setSelected] = useState(publishingOptions.filter((option) => option.current)[0] ?? publishingOptions[0])
-    const username = localStorage.getItem('username')
     const statusChange = async (new_status) => {
         setState(new_status.title)
         setSelected(new_status)

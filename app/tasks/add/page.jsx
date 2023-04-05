@@ -8,7 +8,7 @@ export default function () {
     const router = useRouter();
     useEffect(() => {
         // check repo exists
-        const username = localStorage.getItem('username')
+        const username = typeof localStorage!=="undefined"?localStorage.getItem('username'):""
 
         async function run() {
             if(localStorage.getItem('created') === 'true') {

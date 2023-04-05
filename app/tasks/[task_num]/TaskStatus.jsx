@@ -13,12 +13,22 @@ function classNames(...classes) {
 export default function TaskStatus({task, status}) {
     const publishingOptions = [
         {title: '未開始', description: '這項任務還沒開始', current: status?.includes('未開始'), icon: XCircleIcon},
-        {title: '進行中', description: '這項任務已經著手進行了', current: status?.includes('進行中'), icon: ArrowPathRoundedSquareIcon},
-        {title: '已完成', description: '這項任務已經完成了', current: status?.includes('已完成'), icon: CheckCircleIcon},
+        {
+            title: '進行中',
+            description: '這項任務已經著手進行了',
+            current: status?.includes('進行中'),
+            icon: ArrowPathRoundedSquareIcon
+        },
+        {
+            title: '已完成',
+            description: '這項任務已經完成了',
+            current: status?.includes('已完成'),
+            icon: CheckCircleIcon
+        },
     ]
 
     const [selected, setSelected] = useState(publishingOptions.filter((option) => option.current)[0] ?? publishingOptions[0])
-    const username = localStorage.getItem('username')
+    const username = typeof localStorage !== 'undefined' ? localStorage.getItem('username') : ""
     const statusChange = async (new_status) => {
         await api(`/repos/${username}/__task_db/issues/${task}`, {
             method: 'PATCH',

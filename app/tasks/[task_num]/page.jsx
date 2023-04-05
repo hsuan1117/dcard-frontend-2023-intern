@@ -13,7 +13,7 @@ export default function Page({params}) {
     const router = useRouter()
     const [task, setTask] = useState(null)
     const [trashIcon, setTrashIcon] = useState(1)
-    const username = localStorage.getItem('username')
+    const username = (typeof localStorage!=="undefined"?localStorage.getItem('username'):"")
     useEffect(() => {
         async function run() {
             const issue = await api(`/repos/${username}/__task_db/issues/${params.task_num}`).catch(err => {

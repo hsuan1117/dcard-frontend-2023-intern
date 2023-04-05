@@ -8,10 +8,10 @@ import Link from "next/link";
 import {PencilSquareIcon, TrashIcon as TrashSolidIcon} from "@heroicons/react/24/solid";
 import {TrashIcon} from "@heroicons/react/24/outline";
 
-export default function ({ params }) {
+export default function ({params}) {
     const router = useRouter();
     const [task, setTask] = useState(null)
-    const username = localStorage.getItem('username')
+    const username = typeof localStorage !== "undefined" ? localStorage.getItem('username') : ''
     useEffect(() => {
         // check repo exists
 
@@ -24,6 +24,7 @@ export default function ({ params }) {
                 setTask(res)
             })
         }
+
         run()
     }, [params])
 
