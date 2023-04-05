@@ -1,17 +1,25 @@
 import useSWR from "swr";
 import Link from "next/link";
 import api from "@/app/common/api";
+import {useEffect, useState} from "react";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function ({pathname}) {
-    const username = localStorage.getItem("username")
+    const [username, setUsername] = useState(null)
     const {
         data: tasks,
         isLoading
     } = useSWR(`/repos/${username}/__task_db/issues?per_page=10&page=1`, url => api(url))
+
+    useEffect(() => {
+        localStorage.getItem("username") && setUsername(localStorage.getItem("username"))
+    })
+    if (isLoading) return (<span>載入中</span>)
+    if (error) return (<span>出錯了</span>)
+
     return (
         <>
             {isLoading ?? '<span>載入中</span>'}

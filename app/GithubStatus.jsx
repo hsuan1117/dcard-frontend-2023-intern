@@ -15,14 +15,15 @@ export default function GithubStatus() {
         `&response_type=code`
     useEffect(() => {
         async function run() {
-            const data = await api('/user').catch(err => {
+            const data = await api('/user').then(res => {
+                setLoggedIn(true)
+                setUserName(res?.name)
+                localStorage.setItem('username', res?.login ?? "")
+            }).catch(err => {
                 if (err.status === 401) {
                     setLoggedIn(false)
                 }
             })
-            setLoggedIn(true)
-            setUserName(data?.name)
-            localStorage.setItem('username', data?.login ?? "")
         }
 
         run()

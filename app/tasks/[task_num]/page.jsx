@@ -7,6 +7,7 @@ import {PencilSquareIcon} from "@heroicons/react/24/solid";
 import TaskStatus from "@/app/tasks/[task_num]/TaskStatus";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 export default function Page({params}) {
     const router = useRouter()
@@ -73,7 +74,7 @@ export default function Page({params}) {
                 </div>
             </div>
             <div className={"min-h-screen"}>
-                {task?.body}
+                <ReactMarkdown children={task?.body ?? '無內容'}></ReactMarkdown>
             </div>
         </>
     )
